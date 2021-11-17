@@ -1,0 +1,9 @@
+.bg {
+  background-color: #6379f4;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}

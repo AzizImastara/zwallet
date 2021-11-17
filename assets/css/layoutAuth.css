@@ -1,0 +1,15 @@
+.layout__login {
+  background-color: #6379f4;
+  color: #fff;
+  padding: 60px;
+}
+
+.layout__login h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.layout__login p {
+  font-size: 16px;
+  font-weight: 400;
+}

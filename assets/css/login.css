@@ -1,0 +1,64 @@
+.form__button {
+  margin: 32px 0;
+}
+
+.form__button button {
+  width: 100%;
+  background-color: #dadada;
+  color: #888;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+}
+
+.layout__login--form {
+  padding: 50px !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.layout__login--form h2 {
+  color: #3a3d42;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.layout__login--form p {
+  color: rgba(58, 61, 66, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.layout__login--form a {
+  text-decoration: none;
+  color: #3a3d42;
+}
+
+.forgot__page {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register__page {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+}
+
+.layout__login--form p a {
+  color: #6379f4 !important;
+}
+
+.layout__login--form form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.layout__login--form input {
+  border: none;
+  border-bottom: 1px solid rgba(169, 169, 169, 0.6);
+  margin: 20px 0;
+  padding: 12px 0;
+}
