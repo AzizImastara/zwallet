@@ -1,0 +1,18 @@
+.hero__bg {
+  background-color: #e5e5e5;
+}
+
+.content__bg {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 24px;
+}
+
+.receiver {
+  margin-bottom: 24px;
+}
+
+.receiver__transaction {
+  display: flex;
+  margin: 24px 0;
+}

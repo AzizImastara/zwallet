@@ -1,0 +1,21 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search img {
+  background: rgba(58, 61, 66, 0.1);
+  padding: 16px 12px !important;
+  border: 1px solid rgba(58, 61, 66, 0.1);
+  border-radius: 12px 0 0 12px;
+}
+
+.search input {
+  outline: none;
+  border: none;
+  background: rgba(58, 61, 66, 0.1);
+  border-radius: 0 12px 12px 0;
+  width: 100%;
+  padding: 15px 0;
+}

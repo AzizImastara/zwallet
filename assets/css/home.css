@@ -1,0 +1,102 @@
+.topup {
+  background-color: #6379f4;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.topup__balance,
+.topup__transfer {
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.topup__balance h5,
+.topup__balance h6,
+.topup__balance h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.topup__balance h5 {
+  color: #e0e0e0;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.topup__balance h6 {
+  color: #e0e0e0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.topup__balance h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.topup__transfer button {
+  width: 100%;
+  margin: 12px 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.home__info {
+  margin: 20px 0 !important;
+}
+
+.history__transaction h5 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3a3d42;
+}
+
+.history__transaction a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6379f4;
+  text-decoration: none;
+}
+
+.profile__transaction {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+
+.profile__user {
+  display: flex;
+}
+
+.profile__info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 12px;
+}
+
+.profile__money {
+  display: flex;
+  align-items: center;
+}
+
+.profile__info h6 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #4d4b57;
+}
+
+.profile__info p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #7a7886;
+}

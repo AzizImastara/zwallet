@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "components/module/Navbar";
+import Header from "components/module/Header";
 import Layout from "components/Layout";
 import axios from "utils/axios";
 import { useRouter } from "next/router";
@@ -30,7 +30,7 @@ export default function SSG(props) {
 
   return (
     <Layout title="Rendering With SSG">
-      <Navbar />
+      <Header />
       <h1>Rendering With SSG</h1>
       {props.data.map((item) => (
         <div key={item.id}>

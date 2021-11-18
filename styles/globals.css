@@ -1,7 +1,11 @@
 @import url("assets/css/login.css");
 @import url("assets/css/Footer.css");
 @import url("assets/css/layoutAuth.css");
-@import url("assets/css/navbar.css");
+@import url("assets/css/header.css");
+@import url("assets/css/home.css");
+@import url("assets/css/sidebar.css");
+@import url("assets/css/search.css");
+@import url("assets/css/receiver.css");
 
 html,
 body {

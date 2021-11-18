@@ -1,0 +1,26 @@
+.side {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 16px;
+}
+
+.sidebar {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.sidebar h4 {
+  margin: 0 0 0 12px;
+  font-size: 18px;
+  color: #3a3d42cc;
+  font-weight: 400;
+}
+
+.sidebar h4:hover {
+  color: blue;
+  cursor: pointer;
+}

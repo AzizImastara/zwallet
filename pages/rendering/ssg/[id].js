@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "components/module/Navbar";
+import Header from "components/module/Header";
 import Layout from "components/Layout";
 import axios from "utils/axios";
 
@@ -49,7 +49,7 @@ export async function getStaticProps(context) {
 export default function SSG(props) {
   return (
     <Layout title="Rendering With SSG Detail">
-      <Navbar />
+      <Header />
       <h1>Rendering With SSG Detail</h1>
       <hr />
       <h5>{props.data.name}</h5>

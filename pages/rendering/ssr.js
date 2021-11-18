@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "components/module/Navbar";
+import Header from "components/module/Header";
 import Layout from "components/Layout";
 import axios from "utils/axios";
 import { getDataCookie } from "middleware/authorizationPage";
@@ -37,7 +37,7 @@ export default function SSR(props) {
 
   return (
     <Layout title="Rendering With SSR">
-      <Navbar />
+      <Header />
       <h1>Rendering With SSR</h1>
       {data.map((item) => (
         <div key={item.id}>

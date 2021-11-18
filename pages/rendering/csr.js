@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "components/module/Navbar";
+import Header from "components/module/Header";
 import Layout from "components/Layout";
 import axios from "utils/axios";
 
@@ -23,7 +23,7 @@ export default function CSR(props) {
 
   return (
     <Layout title="Rendering With CSR">
-      <Navbar />
+      <Header />
       <h1>Rendering With CSR</h1>
       {data.map((item) => (
         <div key={item.id}>

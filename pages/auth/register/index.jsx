@@ -25,28 +25,32 @@ export async function getServerSideProps(context) {
 }
 
 export default function Register() {
-  // const router = useRouter();
-  // const [form, setForm] = useState({ email: "", password: "" });
+  const router = useRouter();
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("/auth/login", form)
-  //     .then((res) => {
-  //       console.log(res);
-  //       Cookie.set("id", res.data.data.id);
-  //       Cookie.set("token", res.data.data.token);
-  //       router.push("/main/home");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   console.log(form);
-  // };
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // const handleChangeText = (e) => {
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const registerData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post("auth/register", registerData)
+      .then((res) => {
+        alert("Success Register Data, Check Your Email !");
+        router.push("/auth/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Layout title="Register">
@@ -64,34 +68,34 @@ export default function Register() {
             wherever you are. Desktop, laptop, mobile phone? we cover all of
             that for you!
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               img={lock}
               type="text"
               name="firstName"
               placeholder="Enter your firstname"
-              // onChange={handleChangeText}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <input
               img={lock}
               type="text"
               name="lastName"
               placeholder="Enter your lastname"
-              // onChange={handleChangeText}
+              onChange={(e) => setLastName(e.target.value)}
             />
             <input
               img={mail}
               type="email"
               name="email"
               placeholder="Enter your e-mail"
-              // onChange={handleChangeText}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               img={lock}
               type="password"
               name="password"
               placeholder="Enter your password"
-              // onChange={handleChangeText}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="form__button">
               <button className="btn btn-primary mt-3">Sign Up</button>
