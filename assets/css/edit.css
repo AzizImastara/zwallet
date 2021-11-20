@@ -1,0 +1,91 @@
+.edit__profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.edit__button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.edit__profile h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4d4b57;
+}
+
+.edit__profile h4 {
+  color: #7a7886;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.edit__button button {
+  width: 60%;
+  border-radius: 8px;
+  padding: 12px;
+  color: #4d4b57;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.edit__input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit__input h6 {
+  color: #7a7886;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 0 0 8px;
+}
+
+.personal__info h6 {
+  color: #3a3d42;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.personal__info p {
+  color: #7a7886;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.personal__detail {
+  background-color: #fff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  margin: 12px 0;
+  padding: 12px;
+}
+
+.password__input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.password__input input {
+  width: 80%;
+  margin: 8px 0;
+  border-radius: 12px;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid rgba(169, 169, 169, 0.6);
+}
+
+.password__input button {
+  width: 80%;
+  margin: 8px 0;
+  border-radius: 12px;
+  padding: 12px;
+}

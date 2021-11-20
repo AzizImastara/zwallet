@@ -4,10 +4,8 @@ import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import axios from "utils/axios";
-import { getDataCookie } from "middleware/authorizationPage";
 
 import Image from "next/image";
-
 import samuel from "assets/img/samuel.png";
 
 export default function History(props) {
