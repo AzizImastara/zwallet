@@ -15,7 +15,7 @@ import samuel from "assets/img/samuel.png";
 // Server Side Rendering
 export async function getServerSideProps(context) {
   const dataCookie = await getDataCookie(context);
-  if (!dataCookie.isLogin) {
+  if (!dataCookie.token) {
     return {
       redirect: {
         destination: "/auth/login",
@@ -68,10 +68,10 @@ export default function Home(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3">
+            <div className="col-3 my-4">
               <Sidebar />
             </div>
-            <div className="col-9">
+            <div className="col-9 my-4 ">
               <div className="content__bg">
                 <div className="topup">
                   <div className="topup__balance">
@@ -97,42 +97,6 @@ export default function Home(props) {
                         <Link href="/main/history">See all</Link>
                       </div>
 
-                      <div className="profile__transaction">
-                        <div className="profile__user">
-                          <Image src={samuel} alt="" />
-                          <div className="profile__info">
-                            <h6>Samuel Suhi</h6>
-                            <p>Accept</p>
-                          </div>
-                        </div>
-                        <div className="profile__money">
-                          <h6>+50.000</h6>
-                        </div>
-                      </div>
-                      <div className="profile__transaction">
-                        <div className="profile__user">
-                          <Image src={samuel} alt="" />
-                          <div className="profile__info">
-                            <h6>Samuel Suhi</h6>
-                            <p>Accept</p>
-                          </div>
-                        </div>
-                        <div className="profile__money">
-                          <h6>+50.000</h6>
-                        </div>
-                      </div>
-                      <div className="profile__transaction">
-                        <div className="profile__user">
-                          <Image src={samuel} alt="" />
-                          <div className="profile__info">
-                            <h6>Samuel Suhi</h6>
-                            <p>Accept</p>
-                          </div>
-                        </div>
-                        <div className="profile__money">
-                          <h6>+50.000</h6>
-                        </div>
-                      </div>
                       <div className="profile__transaction">
                         <div className="profile__user">
                           <Image src={samuel} alt="" />

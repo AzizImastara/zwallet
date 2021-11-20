@@ -5,42 +5,13 @@ import Header from "components/module/Header";
 import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
-import Search from "components/Search";
 import axios from "utils/axios";
 import { getDataCookie } from "middleware/authorizationPage";
 
 import Image from "next/image";
 
 import samuel from "assets/img/samuel.png";
-
-// Server Side Rendering
-export async function getServerSideProps(context) {
-  const dataCookie = await getDataCookie(context);
-  if (!dataCookie.isLogin) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const response = await axios
-    .get("/user?page=1&limit=2&search=&sort=", {
-      headers: {
-        Authorization: `Bearer ${dataCookie.token}`,
-      },
-    })
-    .then((res) => {
-      return res.data.data;
-    })
-    .catch((err) => {
-      return [];
-    });
-  return {
-    props: { data: response },
-  };
-}
+import pencil from "assets/img/icon/pencil.svg";
 
 export default function InputAmount(props) {
   // Client Side Rendering
@@ -69,10 +40,10 @@ export default function InputAmount(props) {
         <Header />
         <div className="container">
           <div className="row">
-            <div className="col-3">
+            <div className="col-3 my-4">
               <Sidebar />
             </div>
-            <div className="col-9">
+            <div className="col-9 my-4">
               <div className="content__bg">
                 <div className="amount">
                   <h6>Transfer Money</h6>
@@ -86,11 +57,23 @@ export default function InputAmount(props) {
                     </div>
                   </div>
                 </div>
-                <div className="amount">
+                <div className="amount__text">
                   <p>
-                    Type the amount you want to transfer and then press continue
+                    Type the amount you want to transfer and then press continue{" "}
+                    <br />
                     to the next steps.
                   </p>
+                </div>
+                <div className="amount__transfer">
+                  <h1>0.00</h1>
+                  <h6>Rp120.000 Avaible</h6>
+                  <div className="amount__input">
+                    <Image src={pencil} alt="pencil" />
+                    <input type="text" placeholder="add some notes" />
+                  </div>
+                </div>
+                <div className="amount__button">
+                  <button className="btn btn-primary">Continue</button>
                 </div>
               </div>
             </div>

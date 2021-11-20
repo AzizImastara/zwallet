@@ -13,7 +13,7 @@ import LayoutAuth from "components/LayoutAuth";
 
 export async function getServerSideProps(context) {
   const dataCookie = await getDataCookie(context);
-  if (dataCookie.isLogin) {
+  if (dataCookie.token) {
     return {
       redirect: {
         destination: "/main/home",
@@ -36,7 +36,11 @@ export default function Login() {
         console.log(res);
         Cookie.set("id", res.data.data.id);
         Cookie.set("token", res.data.data.token);
-        router.push("/main/home");
+        if (res.data.data.pin === null) {
+          router.push(`/auth/createPin`);
+        } else {
+          router.push("/main/home");
+        }
       })
       .catch((err) => {
         console.log(err);

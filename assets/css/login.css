@@ -61,4 +61,13 @@
   border-bottom: 1px solid rgba(169, 169, 169, 0.6);
   margin: 20px 0;
   padding: 12px 0;
+  text-align: center;
+}
+
+.layout__pin--form input {
+  border: none;
+  border: 1px solid rgba(169, 169, 169, 0.6);
+  margin: 20px 0;
+  padding: 12px 24px;
+  border-radius: 8px;
 }

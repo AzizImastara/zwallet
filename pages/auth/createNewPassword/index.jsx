@@ -11,19 +11,6 @@ import lock from "assets/img/icon/lock.svg";
 import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
 
-export async function getServerSideProps(context) {
-  const dataCookie = await getDataCookie(context);
-  if (dataCookie.isLogin) {
-    return {
-      redirect: {
-        destination: "/main/home",
-        permanent: false,
-      },
-    };
-  }
-  return { props: {} };
-}
-
 export default function CreateNewPassword() {
   // const router = useRouter();
   // const [form, setForm] = useState({ email: "", password: "" });

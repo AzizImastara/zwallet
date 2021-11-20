@@ -5,6 +5,13 @@
   background-color: #fff;
   border-radius: 24px;
   padding: 16px;
+  height: 80vh;
+  position: sticky !important;
+  top: 110px;
+}
+
+.side__top {
+  height: 100%;
 }
 
 .sidebar {

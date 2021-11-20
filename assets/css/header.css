@@ -1,5 +1,8 @@
 nav {
   background-color: #fff;
+  position: sticky !important;
+  top: 0;
+  z-index: 999;
 }
 
 .user {
@@ -21,4 +24,10 @@ nav {
 
 .user__info p {
   margin: 0;
+}
+
+.user img {
+  height: 60px;
+  width: 55px;
+  border-radius: 8px;
 }

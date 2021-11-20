@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 import grid from "assets/img/icon/grid.svg";
 import plus from "assets/img/icon/plus.svg";
@@ -7,7 +9,17 @@ import arrow from "assets/img/icon/arrow-up.svg";
 import user from "assets/img/icon/user.svg";
 import logout from "assets/img/icon/log-out.svg";
 
+
+
 export default function Sidebar() {
+
+  const router = useRouter();
+
+  const keluar = () => {
+    Cookies.remove("id")
+    Cookies.remove("token")
+    router.push("/auth/login")
+  }
   return (
     <>
       <div className="side">
@@ -32,7 +44,7 @@ export default function Sidebar() {
         <div className="side__bottom">
           <div className="sidebar">
             <Image src={logout} alt="logout" />
-            <h4>Log Out</h4>
+            <h4 onClick={keluar}>Log Out</h4>
           </div>
         </div>
       </div>

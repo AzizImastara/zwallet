@@ -10,35 +10,6 @@ import Image from "next/image";
 
 import samuel from "assets/img/samuel.png";
 
-// Server Side Rendering
-export async function getServerSideProps(context) {
-  const dataCookie = await getDataCookie(context);
-  if (!dataCookie.isLogin) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const response = await axios
-    .get("/user?page=1&limit=2&search=&sort=", {
-      headers: {
-        Authorization: `Bearer ${dataCookie.token}`,
-      },
-    })
-    .then((res) => {
-      return res.data.data;
-    })
-    .catch((err) => {
-      return [];
-    });
-  return {
-    props: { data: response },
-  };
-}
-
 export default function History(props) {
   // Client Side Rendering
   // const [data, setData] = useState(props.data);
@@ -66,10 +37,10 @@ export default function History(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3">
+            <div className="col-3 my-4">
               <Sidebar />
             </div>
-            <div className="col-9">
+            <div className="col-9 my-4">
               <div className="content__bg">
                 <div className="history">
                   <div className="history__transaction d-flex justify-content-between">

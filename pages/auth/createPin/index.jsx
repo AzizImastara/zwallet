@@ -1,24 +1,10 @@
 import React, { useState } from "react";
 import axios from "utils/axios";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import { getDataCookie } from "middleware/authorizationPage";
 
 import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
-
-export async function getServerSideProps(context) {
-  const dataCookie = await getDataCookie(context);
-  if (dataCookie.isLogin) {
-    return {
-      redirect: {
-        destination: "/main/home",
-        permanent: false,
-      },
-    };
-  }
-  return { props: {} };
-}
 
 const inputStyle = {
   width: "30px",
@@ -41,10 +27,23 @@ export default function CreatePin() {
     setPin({ ...pin, [`pin${event.target.name}`]: event.target.value });
   };
 
-  const handleSubmit = () => {
-    const allPin =
-      pin.pin1 + pin.pin2 + pin.pin3 + pin.pin4 + pin.pin5 + pin.pin6;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const allPin = parseInt(
+      pin.pin1 + pin.pin2 + pin.pin3 + pin.pin4 + pin.pin5 + pin.pin6
+    );
     console.log(allPin);
+    const id = Cookie.get("id");
+
+    axios
+      .patch(`/user/pin/${id}`, { pin: allPin })
+      .then((res) => {
+        console.log(res);
+        router.push("/main/home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -63,72 +62,71 @@ export default function CreatePin() {
             Zwallet app. Keep it secret and don’t tell anyone about your Zwallet
             account password and the PIN.
           </p>
-          <div className="mt-3">
-            <div className="row">
-              <div className="col-2">
-                <input
-                  style={inputStyle}
-                  maxLength="1"
-                  onChange={(event) => addPin(event)}
-                  name="1"
-                  id="pin-1"
-                />
-              </div>
-              <div className="col-2">
-                <input
-                  style={inputStyle}
-                  maxLength="1"
-                  onChange={(event) => addPin(event)}
-                  name="2"
-                  id="pin-2"
-                />
-              </div>
-              <div className="col-2">
-                <input
-                  style={inputStyle}
-                  maxLength="1"
-                  onChange={(event) => addPin(event)}
-                  name="3"
-                  id="pin-3"
-                />
-              </div>
-              <div className="col-2">
-                <input
-                  style={inputStyle}
-                  maxLength="1"
-                  onChange={(event) => addPin(event)}
-                  name="4"
-                  id="pin-4"
-                />
-              </div>
-              <div className="col-2">
-                <input
-                  style={inputStyle}
-                  maxLength="1"
-                  onChange={(event) => addPin(event)}
-                  name="5"
-                  id="pin-5"
-                />
-              </div>
-              <div className="col-2">
-                <input
-                  style={inputStyle}
-                  maxLength="1"
-                  onChange={(event) => addPin(event)}
-                  name="6"
-                  id="pin-6"
-                />
-              </div>
-              <div className="form__button">
-                <button
-                  className="btn btn-primary mt-3 "
-                  onClick={handleSubmit}
-                >
-                  Confirm
-                </button>
+          <form onSubmit={handleSubmit}>
+            <div className="mt-3">
+              <div className="row">
+                <div className="col-2">
+                  <input
+                    style={inputStyle}
+                    maxLength="1"
+                    onChange={(event) => addPin(event)}
+                    name="1"
+                    id="pin-1"
+                  />
+                </div>
+                <div className="col-2">
+                  <input
+                    style={inputStyle}
+                    maxLength="1"
+                    onChange={(event) => addPin(event)}
+                    name="2"
+                    id="pin-2"
+                  />
+                </div>
+                <div className="col-2">
+                  <input
+                    style={inputStyle}
+                    maxLength="1"
+                    onChange={(event) => addPin(event)}
+                    name="3"
+                    id="pin-3"
+                  />
+                </div>
+                <div className="col-2">
+                  <input
+                    style={inputStyle}
+                    maxLength="1"
+                    onChange={(event) => addPin(event)}
+                    name="4"
+                    id="pin-4"
+                  />
+                </div>
+                <div className="col-2">
+                  <input
+                    style={inputStyle}
+                    maxLength="1"
+                    onChange={(event) => addPin(event)}
+                    name="5"
+                    id="pin-5"
+                  />
+                </div>
+                <div className="col-2">
+                  <input
+                    style={inputStyle}
+                    maxLength="1"
+                    onChange={(event) => addPin(event)}
+                    name="6"
+                    id="pin-6"
+                  />
+                </div>
+                <div className="form__button">
+                  <button className="btn btn-primary mt-3 " type="submit">
+                    Confirm
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </Layout>
