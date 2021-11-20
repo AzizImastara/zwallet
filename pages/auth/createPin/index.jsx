@@ -5,6 +5,7 @@ import Cookie from "js-cookie";
 
 import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
+import SuccessPin from "components/module/SuccessPin";
 
 const inputStyle = {
   width: "30px",
@@ -12,6 +13,7 @@ const inputStyle = {
 
 export default function CreatePin() {
   const [pin, setPin] = useState({});
+  const [success, setSuccess] = useState(false);
 
   const addPin = (event) => {
     if (event.target.value) {
@@ -39,7 +41,8 @@ export default function CreatePin() {
       .patch(`/user/pin/${id}`, { pin: allPin })
       .then((res) => {
         console.log(res);
-        router.push("/main/home");
+        if (res.data.status === 200) setSuccess(true);
+        // router.push("/main/home");
       })
       .catch((err) => {
         console.log(err);
@@ -53,80 +56,86 @@ export default function CreatePin() {
           <LayoutAuth />
         </div>
         <div className="col-lg-5 col-sm-12 d-flex justify-content-center layout__login--form">
-          <h2>
-            Secure Your Account, Your Wallet, and Your Data With 6 Digits PIN
-            That You Created Yourself.
-          </h2>
-          <p>
-            Create 6 digits pin to secure all your money and your data in
-            Zwallet app. Keep it secret and don’t tell anyone about your Zwallet
-            account password and the PIN.
-          </p>
-          <form onSubmit={handleSubmit}>
-            <div className="mt-3">
-              <div className="row">
-                <div className="col-2">
-                  <input
-                    style={inputStyle}
-                    maxLength="1"
-                    onChange={(event) => addPin(event)}
-                    name="1"
-                    id="pin-1"
-                  />
+          {success ? (
+            <SuccessPin />
+          ) : (
+            <div>
+              <h2>
+                Secure Your Account, Your Wallet, and Your Data With 6 Digits
+                PIN That You Created Yourself.
+              </h2>
+              <p>
+                Create 6 digits pin to secure all your money and your data in
+                Zwallet app. Keep it secret and don’t tell anyone about your
+                Zwallet account password and the PIN.
+              </p>
+              <form onSubmit={handleSubmit}>
+                <div className="mt-3">
+                  <div className="row">
+                    <div className="col-2">
+                      <input
+                        style={inputStyle}
+                        maxLength="1"
+                        onChange={(event) => addPin(event)}
+                        name="1"
+                        id="pin-1"
+                      />
+                    </div>
+                    <div className="col-2">
+                      <input
+                        style={inputStyle}
+                        maxLength="1"
+                        onChange={(event) => addPin(event)}
+                        name="2"
+                        id="pin-2"
+                      />
+                    </div>
+                    <div className="col-2">
+                      <input
+                        style={inputStyle}
+                        maxLength="1"
+                        onChange={(event) => addPin(event)}
+                        name="3"
+                        id="pin-3"
+                      />
+                    </div>
+                    <div className="col-2">
+                      <input
+                        style={inputStyle}
+                        maxLength="1"
+                        onChange={(event) => addPin(event)}
+                        name="4"
+                        id="pin-4"
+                      />
+                    </div>
+                    <div className="col-2">
+                      <input
+                        style={inputStyle}
+                        maxLength="1"
+                        onChange={(event) => addPin(event)}
+                        name="5"
+                        id="pin-5"
+                      />
+                    </div>
+                    <div className="col-2">
+                      <input
+                        style={inputStyle}
+                        maxLength="1"
+                        onChange={(event) => addPin(event)}
+                        name="6"
+                        id="pin-6"
+                      />
+                    </div>
+                    <div className="form__button">
+                      <button className="btn btn-primary mt-3 " type="submit">
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="col-2">
-                  <input
-                    style={inputStyle}
-                    maxLength="1"
-                    onChange={(event) => addPin(event)}
-                    name="2"
-                    id="pin-2"
-                  />
-                </div>
-                <div className="col-2">
-                  <input
-                    style={inputStyle}
-                    maxLength="1"
-                    onChange={(event) => addPin(event)}
-                    name="3"
-                    id="pin-3"
-                  />
-                </div>
-                <div className="col-2">
-                  <input
-                    style={inputStyle}
-                    maxLength="1"
-                    onChange={(event) => addPin(event)}
-                    name="4"
-                    id="pin-4"
-                  />
-                </div>
-                <div className="col-2">
-                  <input
-                    style={inputStyle}
-                    maxLength="1"
-                    onChange={(event) => addPin(event)}
-                    name="5"
-                    id="pin-5"
-                  />
-                </div>
-                <div className="col-2">
-                  <input
-                    style={inputStyle}
-                    maxLength="1"
-                    onChange={(event) => addPin(event)}
-                    name="6"
-                    id="pin-6"
-                  />
-                </div>
-                <div className="form__button">
-                  <button className="btn btn-primary mt-3 " type="submit">
-                    Confirm
-                  </button>
-                </div>
-              </div>
+              </form>
             </div>
-          </form>
+          )}
         </div>
       </div>
     </Layout>

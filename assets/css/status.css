@@ -1,0 +1,45 @@
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.status p {
+  color: #7a7886;
+  font-size: 16px;
+}
+
+.status__content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.status__info p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7a7886;
+}
+
+.status__info h6 {
+  color: #514f5b;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.status__button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.status__button button {
+  margin: 0 0 0 12px;
+  border-radius: 8px;
+  padding: 12px;
+}

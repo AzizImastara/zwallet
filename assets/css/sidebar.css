@@ -31,3 +31,20 @@
   color: blue;
   cursor: pointer;
 }
+
+.modal-body p {
+  font-size: 16px;
+  color: rgba(58, 61, 66, 0.6);
+}
+
+.modal-body input {
+  width: 100%;
+  border: 1px solid #a9a9a9;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.modal-footer button {
+  padding: 12px 32px;
+  border-radius: 8px;
+}

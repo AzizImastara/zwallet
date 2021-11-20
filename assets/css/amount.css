@@ -13,11 +13,14 @@
   margin: 32px 0;
 }
 
-.amount__transfer h1 {
-  color: #b5bdcc;
+.amount__transfer--input input {
+  color: #6379f4;
   font-size: 42px;
   font-weight: 700;
   margin: 24px 0;
+  text-align: center;
+  outline: none;
+  border: none;
 }
 
 .amount__transfer h6 {

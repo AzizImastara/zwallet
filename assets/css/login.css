@@ -71,3 +71,9 @@
   padding: 12px 24px;
   border-radius: 8px;
 }
+
+.layout__login--form img {
+  padding: 20px 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+}

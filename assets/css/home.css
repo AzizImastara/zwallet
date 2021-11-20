@@ -74,6 +74,13 @@
   display: flex;
 }
 
+.profile__user img {
+  height: 60px;
+  width: 55px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .profile__info {
   display: flex;
   align-items: flex-start;

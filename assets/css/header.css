@@ -30,4 +30,5 @@ nav {
   height: 60px;
   width: 55px;
   border-radius: 8px;
+  object-fit: cover;
 }

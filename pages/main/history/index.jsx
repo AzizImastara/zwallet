@@ -11,25 +11,22 @@ import Image from "next/image";
 import samuel from "assets/img/samuel.png";
 
 export default function History(props) {
-  // Client Side Rendering
-  // const [data, setData] = useState(props.data);
-  // // useEffect(() => {
-  // //   getDataUser();
-  // // }, []);
-  // const getDataUser = () => {
-  //   axios
-  //     .get("/user?page=1&limit=2&search=&sort=")
-  //     .then((res) => {
-  //       setData(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  // };
-  // ==========================================================
+  const [transaction, setTransaction] = useState([]);
 
-  // Server Side Rendering
-  // console.log(props);
+  const HistoryTransaction = () => {
+    axios
+      .get(`transaction/history?page=1&limit=10&filter=MONTH`)
+      .then((res) => {
+        setTransaction(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    HistoryTransaction();
+  }, []);
 
   return (
     <Layout title="History">
@@ -49,78 +46,29 @@ export default function History(props) {
                       -- Select Filter --
                     </button>
                   </div>
-                  <div className="profile__transaction">
-                    <div className="profile__user">
-                      <Image src={samuel} alt="" />
-                      <div className="profile__info">
-                        <h6>Samuel Suhi</h6>
-                        <p>Accept</p>
+                  {transaction?.map((el, index) => {
+                    return (
+                      <div className="profile__transaction" key={index}>
+                        <div className="profile__user">
+                          <img
+                            src={
+                              el.image
+                                ? `http://localhost:3001/uploads/${el?.image}`
+                                : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                            }
+                            alt="profile"
+                          />
+                          <div className="profile__info">
+                            <h6>{el.firstName}</h6>
+                            <p>{el.status}</p>
+                          </div>
+                        </div>
+                        <div className="profile__money">
+                          <h6>{el.amount}</h6>
+                        </div>
                       </div>
-                    </div>
-                    <div className="profile__money">
-                      <h6>+50.000</h6>
-                    </div>
-                  </div>
-                  <div className="profile__transaction">
-                    <div className="profile__user">
-                      <Image src={samuel} alt="" />
-                      <div className="profile__info">
-                        <h6>Samuel Suhi</h6>
-                        <p>Accept</p>
-                      </div>
-                    </div>
-                    <div className="profile__money">
-                      <h6>+50.000</h6>
-                    </div>
-                  </div>
-                  <div className="profile__transaction">
-                    <div className="profile__user">
-                      <Image src={samuel} alt="" />
-                      <div className="profile__info">
-                        <h6>Samuel Suhi</h6>
-                        <p>Accept</p>
-                      </div>
-                    </div>
-                    <div className="profile__money">
-                      <h6>+50.000</h6>
-                    </div>
-                  </div>
-                  <div className="profile__transaction">
-                    <div className="profile__user">
-                      <Image src={samuel} alt="" />
-                      <div className="profile__info">
-                        <h6>Samuel Suhi</h6>
-                        <p>Accept</p>
-                      </div>
-                    </div>
-                    <div className="profile__money">
-                      <h6>+50.000</h6>
-                    </div>
-                  </div>
-                  <div className="profile__transaction">
-                    <div className="profile__user">
-                      <Image src={samuel} alt="" />
-                      <div className="profile__info">
-                        <h6>Samuel Suhi</h6>
-                        <p>Accept</p>
-                      </div>
-                    </div>
-                    <div className="profile__money">
-                      <h6>+50.000</h6>
-                    </div>
-                  </div>
-                  <div className="profile__transaction">
-                    <div className="profile__user">
-                      <Image src={samuel} alt="" />
-                      <div className="profile__info">
-                        <h6>Samuel Suhi</h6>
-                        <p>Accept</p>
-                      </div>
-                    </div>
-                    <div className="profile__money">
-                      <h6>+50.000</h6>
-                    </div>
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -128,11 +76,6 @@ export default function History(props) {
         </div>
         <Footer />
       </div>
-      {/* {props.data.map((item) => (
-        <div key={item.id}>
-          <h3>{item.firstName}</h3>
-        </div>
-      ))} */}
     </Layout>
   );
 }

@@ -5,10 +5,12 @@ import Header from "components/module/Header";
 import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
+import Chart from "components/Chart";
 import axios from "utils/axios";
 import { getDataCookie } from "middleware/authorizationPage";
 
 import Image from "next/image";
+import Cookie from "js-cookie";
 
 import samuel from "assets/img/samuel.png";
 
@@ -42,25 +44,38 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
-  // Client Side Rendering
-  // const [data, setData] = useState(props.data);
-  // // useEffect(() => {
-  // //   getDataUser();
-  // // }, []);
-  // const getDataUser = () => {
-  //   axios
-  //     .get("/user?page=1&limit=2&search=&sort=")
-  //     .then((res) => {
-  //       setData(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  // };
-  // ==========================================================
+  const [data, setData] = useState({});
+  const [historyData, setHistoryData] = useState([]);
 
-  // Server Side Rendering
-  // console.log(props);
+  const id = Cookie.get("id");
+
+  const getDataUser = () => {
+    axios
+      .get(`/user/profile/${id}`)
+      .then((res) => {
+        // console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  const History = () => {
+    axios
+      .get(`/transaction/history?page=1&limit=2&filter=MONTH`)
+      .then((res) => {
+        setHistoryData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDataUser();
+    History();
+  }, []);
 
   return (
     <Layout title="Home">
@@ -76,8 +91,8 @@ export default function Home(props) {
                 <div className="topup">
                   <div className="topup__balance">
                     <h5>Balance</h5>
-                    <h2>Rp120.000</h2>
-                    <h6>+62 813-9387-7946</h6>
+                    <h2>Rp{data.balance}</h2>
+                    <h6>{data.noTelp}</h6>
                   </div>
                   <div className="topup__transfer">
                     <button className="btn">Transfer</button>
@@ -86,8 +101,8 @@ export default function Home(props) {
                 </div>
                 <div className="row home__info">
                   <div className="col-7">
-                    <div className="chart d-flex justify-content-center">
-                      <h1>CHART</h1>
+                    <div className="chart">
+                      <Chart />
                     </div>
                   </div>
                   <div className="col-5">
@@ -97,18 +112,29 @@ export default function Home(props) {
                         <Link href="/main/history">See all</Link>
                       </div>
 
-                      <div className="profile__transaction">
-                        <div className="profile__user">
-                          <Image src={samuel} alt="" />
-                          <div className="profile__info">
-                            <h6>Samuel Suhi</h6>
-                            <p>Accept</p>
+                      {historyData?.map((el, index) => {
+                        return (
+                          <div className="profile__transaction" key={index}>
+                            <div className="profile__user">
+                              <img
+                                src={
+                                  el.image
+                                    ? `http://localhost:3001/uploads/${el?.image}`
+                                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                                }
+                                alt="profile"
+                              />
+                              <div className="profile__info">
+                                <h6>{el.firstName}</h6>
+                                <p>{el.status}</p>
+                              </div>
+                            </div>
+                            <div className="profile__money">
+                              <h6>{el.amount}</h6>
+                            </div>
                           </div>
-                        </div>
-                        <div className="profile__money">
-                          <h6>+50.000</h6>
-                        </div>
-                      </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -117,11 +143,6 @@ export default function Home(props) {
           </div>
           <Footer />
         </div>
-        {/* {props.data.map((item) => (
-        <div key={item.id}>
-          <h3>{item.firstName}</h3>
-        </div>
-      ))} */}
       </div>
     </Layout>
   );

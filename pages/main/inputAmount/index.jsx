@@ -65,7 +65,9 @@ export default function InputAmount(props) {
                   </p>
                 </div>
                 <div className="amount__transfer">
-                  <h1>0.00</h1>
+                  <div className="amount__transfer--input">
+                    <input type="number" placeholder="0.00" />
+                  </div>
                   <h6>Rp120.000 Avaible</h6>
                   <div className="amount__input">
                     <Image src={pencil} alt="pencil" />
