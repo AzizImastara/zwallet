@@ -4,13 +4,14 @@ import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import axios from "utils/axios";
+import Cookie from "js-cookie";
+import Swal from "sweetalert2";
 
 import Image from "next/image";
 import call from "assets/img/icon/call.svg";
 
 export default function ChangePin(props) {
   const [pin, setPin] = useState({});
-  // const [success, setSuccess] = useState(false);
 
   const addPin = (event) => {
     if (event.target.value) {
@@ -31,18 +32,31 @@ export default function ChangePin(props) {
     const allPin = parseInt(
       pin.pin1 + pin.pin2 + pin.pin3 + pin.pin4 + pin.pin5 + pin.pin6
     );
-    console.log(allPin);
-    // const id = Cookie.get("id");
+    const id = Cookie.get("id");
 
-    // axios
-    //   .patch(`/user/pin/${id}`, { pin: allPin })
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.data.status === 200) setSuccess(true);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .patch(`/user/pin/${id}`, { pin: allPin })
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          position: "top-end",
+          width: 200,
+          icon: "success",
+          title: res.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "top-end",
+          width: 200,
+          icon: "error",
+          title: err.response.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      });
   };
   return (
     <Layout title="Change Pin">

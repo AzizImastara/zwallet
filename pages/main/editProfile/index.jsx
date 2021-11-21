@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "components/module/Header";
 import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 export default function EditProfile(props) {
   const [data, setData] = useState({});
   const router = useRouter();
+  const target = useRef(null);
 
   const id = Cookie.get("id");
 
@@ -54,6 +55,21 @@ export default function EditProfile(props) {
     router.push("/main/changePin");
   };
 
+  const onChangeFile = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    axios
+      .patch(`/user/image/${id}`, formData)
+      .then((res) => {
+        if (res.status === 200) {
+          getDataUser();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Layout title="Edit Profile">
       <Header />
@@ -76,7 +92,14 @@ export default function EditProfile(props) {
                   />
                   <div className="edit__input my-3">
                     <Image src={pencil} />
-                    <h6>Edit</h6>
+                    <h6 onClick={() => target.current.click()}>Edit</h6>
+                    <input
+                      style={{ display: "none" }}
+                      type="file"
+                      ref={target}
+                      name="image"
+                      onChange={onChangeFile}
+                    ></input>
                   </div>
                   <h2>{data.firstName + " " + data.lastName}</h2>
                   <h4>{data.noTelp}</h4>

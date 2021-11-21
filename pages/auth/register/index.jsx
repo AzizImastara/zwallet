@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { getDataCookie } from "middleware/authorizationPage";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 import mail from "assets/img/icon/mail.svg";
 import lock from "assets/img/icon/lock.svg";
@@ -31,11 +32,25 @@ export default function Register() {
     axios
       .post("auth/register", registerData)
       .then((res) => {
-        alert("Success Register Data, Check Your Email !");
+        Swal.fire({
+          position: "top-end",
+          width: 200,
+          icon: "success",
+          title: res.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
         router.push("/auth/login");
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          position: "top-end",
+          width: 200,
+          icon: "error",
+          title: err.response.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
   };
 

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { getDataCookie } from "middleware/authorizationPage";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 import mail from "assets/img/icon/mail.svg";
 import lock from "assets/img/icon/lock.svg";
@@ -33,7 +34,15 @@ export default function Login() {
     axios
       .post("/auth/login", form)
       .then((res) => {
-        console.log(res);
+        // alert(res.data.msg);
+        Swal.fire({
+          position: "top-end",
+          width: 200,
+          icon: "success",
+          title: res.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
         Cookie.set("id", res.data.data.id);
         Cookie.set("token", res.data.data.token);
         if (res.data.data.pin === null) {
@@ -43,9 +52,16 @@ export default function Login() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // alert(err.response.data.msg);
+        Swal.fire({
+          position: "top-end",
+          width: 200,
+          icon: "error",
+          title: err.response.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
-    console.log(form);
   };
 
   const handleChangeText = (e) => {

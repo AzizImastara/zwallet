@@ -5,6 +5,7 @@ import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import axios from "utils/axios";
 import Cookie from "js-cookie";
+import Link from "next/link";
 
 import Image from "next/image";
 
@@ -60,8 +61,13 @@ export default function PersonalInfo(props) {
                     <h6>{data.email}</h6>
                   </div>
                   <div className="personal__detail">
-                    <p>Phone Number</p>
-                    <h6>{data.noTelp}</h6>
+                    <div className="manage__telp">
+                      <div className="manage__telp--data">
+                        <p>Phone Number</p>
+                        <h6>{data.noTelp}</h6>
+                      </div>
+                      <Link href="/main/addPhoneNumber">Manage</Link>
+                    </div>
                   </div>
                 </div>
               </div>

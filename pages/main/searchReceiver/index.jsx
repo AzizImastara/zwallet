@@ -11,15 +11,23 @@ import axios from "utils/axios";
 export default function SearchReceiver(props) {
   const [data, setData] = useState([]);
 
-  const getDataUser = () => {
+  const getDataUser = (search) => {
     axios
-      .get(`/user?page=1&limit=50&search=&sort=firstName ASC`)
+      .get(
+        `/user?page=1&limit=50&search=${
+          search ? search : ""
+        }&sort=firstName ASC`
+      )
       .then((res) => {
         setData(res.data.data);
       })
       .catch((err) => {
         console.log(err.response);
       });
+  };
+
+  const searchUser = (e) => {
+    getDataUser(e.target.value);
   };
 
   useEffect(() => {
@@ -40,7 +48,7 @@ export default function SearchReceiver(props) {
                 <div className="receiver">
                   <h6>Search Receiver</h6>
                 </div>
-                <Search />
+                <Search handleChange={searchUser} />
                 {data?.map((el, index) => {
                   return (
                     <div className="profile__transaction" key={index}>

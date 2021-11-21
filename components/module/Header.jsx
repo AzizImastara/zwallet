@@ -48,7 +48,7 @@ export default function Header(props) {
                 alt="profile"
               />
               <div className="user__info">
-                <h5>{data.firstName + data.lastName}</h5>
+                <h5>{data.firstName + " " + data.lastName}</h5>
                 <p>{data.noTelp}</p>
               </div>
               <Image src={bell} alt="bell" />

@@ -58,6 +58,7 @@
   font-size: 16px;
   font-weight: 400;
   margin: 0 0 0 8px;
+  cursor: pointer;
 }
 
 .personal__info h6 {
@@ -174,4 +175,16 @@
   text-align: center;
   margin-bottom: 32px;
   border-radius: 8px;
+}
+
+.manage__telp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manage__telp a {
+  text-decoration: none;
+  color: #6379f4;
+  font-size: 16px;
 }

@@ -40,7 +40,6 @@ export default function CreatePin() {
     axios
       .patch(`/user/pin/${id}`, { pin: allPin })
       .then((res) => {
-        console.log(res);
         if (res.data.status === 200) setSuccess(true);
       })
       .catch((err) => {

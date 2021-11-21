@@ -2,38 +2,16 @@ import React, { useState } from "react";
 import axios from "utils/axios";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import { getDataCookie } from "middleware/authorizationPage";
 import Link from "next/link";
-
-import mail from "assets/img/icon/mail.svg";
-import lock from "assets/img/icon/lock.svg";
 
 import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
 
 export default function ForgotPassword() {
-  // const router = useRouter();
-  // const [form, setForm] = useState({ email: "", password: "" });
+  const router = useRouter();
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("/auth/login", form)
-  //     .then((res) => {
-  //       console.log(res);
-  //       Cookie.set("id", res.data.data.id);
-  //       Cookie.set("token", res.data.data.token);
-  //       router.push("/main/home");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   console.log(form);
-  // };
-
-  // const handleChangeText = (e) => {
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
+  const [email, setEmail] = useState("");
+  const [linkDirect, setLinkDirect] = useState("");
 
   return (
     <Layout title="Forgot Password">
@@ -52,13 +30,7 @@ export default function ForgotPassword() {
             screens.
           </p>
           <form>
-            <input
-              img={mail}
-              type="email"
-              name="email"
-              placeholder="Enter your e-mail"
-              // onChange={handleChangeText}
-            />
+            <input type="email" name="email" placeholder="Enter your e-mail" />
             <div className="form__button">
               <button className="btn btn-primary mt-3">Confirm</button>
             </div>
