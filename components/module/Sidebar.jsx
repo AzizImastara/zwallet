@@ -33,6 +33,11 @@ export default function Sidebar() {
     router.push("/main/searchReceiver");
   };
 
+  const edit = (e) => {
+    e.preventDefault();
+    router.push("/main/editProfile");
+  };
+
   return (
     <>
       <div className="side">
@@ -51,7 +56,7 @@ export default function Sidebar() {
           </div>
           <div className="sidebar">
             <Image src={user} alt="user" />
-            <h4>Profile</h4>
+            <h4 onClick={edit}>Profile</h4>
           </div>
         </div>
         <div className="side__bottom">

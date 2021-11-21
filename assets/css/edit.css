@@ -5,10 +5,11 @@
   flex-direction: column;
 }
 
-.edit__button {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+.edit__profile img {
+  height: 60px;
+  width: 55px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .edit__profile h2 {
@@ -23,19 +24,33 @@
   font-weight: 400;
 }
 
-.edit__button button {
-  width: 60%;
+.edit__button {
+  display: flex;
   border-radius: 8px;
   padding: 12px;
-  color: #4d4b57;
+  background-color: #e5e8ed;
+  justify-content: space-between;
+  margin: 12px auto;
+  width: 70%;
+  align-items: center;
+}
+
+.edit__button img {
+  cursor: pointer;
+}
+
+.edit__button button {
   font-size: 16px;
   font-weight: 700;
+  border: none;
+  color: #4d4b57;
+  background-color: #e5e8ed;
 }
 
 .edit__input {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .edit__input h6 {
@@ -49,7 +64,7 @@
   color: #3a3d42;
   font-size: 18px;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 12px 0;
 }
 
 .personal__info p {
@@ -88,4 +103,75 @@
   margin: 8px 0;
   border-radius: 12px;
   padding: 12px;
+}
+
+.phone {
+  padding: 120px;
+}
+
+.phone__input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid rgba(169, 169, 169, 0.6);
+}
+
+.phone__input input {
+  border: none;
+  outline: none;
+}
+.phone__input img {
+  margin: 0 44px 0 0 !important;
+}
+
+.phone__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone__button button {
+  background-color: #dadada;
+  padding: 12px 40px;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+.manage__phone {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.manage__info p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7a7886;
+}
+
+.manage__info h6 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #514f5b;
+}
+
+.pin__flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px;
+}
+
+.pin__change {
+  padding: 0 !important;
+  width: 40px !important;
+}
+
+.pin__change input {
+  width: 50px;
+  text-align: center;
+  margin-bottom: 32px;
+  border-radius: 8px;
 }

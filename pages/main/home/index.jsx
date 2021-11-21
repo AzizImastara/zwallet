@@ -8,6 +8,7 @@ import Footer from "components/module/Footer";
 import Chart from "components/Chart";
 import axios from "utils/axios";
 import { getDataCookie } from "middleware/authorizationPage";
+import { Modal, Button } from "react-bootstrap";
 
 import Image from "next/image";
 import Cookie from "js-cookie";
@@ -46,6 +47,10 @@ export async function getServerSideProps(context) {
 export default function Home(props) {
   const [data, setData] = useState({});
   const [historyData, setHistoryData] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const id = Cookie.get("id");
 
@@ -96,7 +101,9 @@ export default function Home(props) {
                   </div>
                   <div className="topup__transfer">
                     <button className="btn">Transfer</button>
-                    <button className="btn">Top Up</button>
+                    <button onClick={handleShow} className="btn">
+                      Top Up
+                    </button>
                   </div>
                 </div>
                 <div className="row home__info">
@@ -119,7 +126,7 @@ export default function Home(props) {
                               <img
                                 src={
                                   el.image
-                                    ? `http://localhost:3001/uploads/${el?.image}`
+                                    ? `${process.env.URL_BACKEND_LOCAL}/uploads/${el?.image}`
                                     : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                                 }
                                 alt="profile"
@@ -142,6 +149,18 @@ export default function Home(props) {
             </div>
           </div>
           <Footer />
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Topup</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Enter the amount of money, and click submit</p>
+              <input type="text" />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary">Submit</Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </Layout>

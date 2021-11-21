@@ -5,9 +5,12 @@ import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import axios from "utils/axios";
 
-export default function ChangePassword(props) {
+import Image from "next/image";
+import call from "assets/img/icon/call.svg";
+
+export default function AddPhoneNumber(props) {
   return (
-    <Layout title="Change Password">
+    <Layout title="Add Phone Number">
       <Header />
       <div className="hero__bg">
         <div className="container">
@@ -18,17 +21,23 @@ export default function ChangePassword(props) {
             <div className="col-9 my-4">
               <div className="content__bg">
                 <div className="personal__info">
-                  <h6>Change Password</h6>
+                  <h6>Add Phone Number</h6>
                   <p>
-                    You must enter your current password and then type your new
-                    password twice.
+                    Add at least one phone number for the transfer <br /> ID so
+                    you can start transfering your money to <br /> another user.
                   </p>
                 </div>
-                <div className="password__input">
-                  <input type="password" placeholder="Current password" />
-                  <input type="password" placeholder="New password" />
-                  <input type="password" placeholder="Input new password" />
-                  <button className="btn btn-light">Change Password</button>
+                <div className="phone">
+                  <div className="phone__input">
+                    <Image src={call} alt="" />
+                    <input
+                      type="number"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  <div className="phone__button">
+                    <button className="btn btn-light">Add Phone Number</button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -42,7 +42,6 @@ export default function CreatePin() {
       .then((res) => {
         console.log(res);
         if (res.data.status === 200) setSuccess(true);
-        // router.push("/main/home");
       })
       .catch((err) => {
         console.log(err);
@@ -126,7 +125,7 @@ export default function CreatePin() {
                         id="pin-6"
                       />
                     </div>
-                    <div className="form__button">
+                    <div className="form__button ">
                       <button className="btn btn-primary mt-3 " type="submit">
                         Confirm
                       </button>

@@ -67,3 +67,7 @@
   padding: 12px 32px;
   border-radius: 8px;
 }
+
+.pin__style input {
+  text-align: center;
+}

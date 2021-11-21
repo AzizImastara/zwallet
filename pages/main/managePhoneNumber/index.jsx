@@ -5,9 +5,12 @@ import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import axios from "utils/axios";
 
-export default function ChangePassword(props) {
+import Image from "next/image";
+import trash from "assets/img/icon/trash.svg";
+
+export default function ManagePhoneNumber(props) {
   return (
-    <Layout title="Change Password">
+    <Layout title="Manage Phone Number">
       <Header />
       <div className="hero__bg">
         <div className="container">
@@ -18,17 +21,18 @@ export default function ChangePassword(props) {
             <div className="col-9 my-4">
               <div className="content__bg">
                 <div className="personal__info">
-                  <h6>Change Password</h6>
+                  <h6>Manage Phone Number</h6>
                   <p>
-                    You must enter your current password and then type your new
-                    password twice.
+                    You can only delete the phone number and then <br /> you
+                    must add another phone number.
                   </p>
                 </div>
-                <div className="password__input">
-                  <input type="password" placeholder="Current password" />
-                  <input type="password" placeholder="New password" />
-                  <input type="password" placeholder="Input new password" />
-                  <button className="btn btn-light">Change Password</button>
+                <div className="manage__phone">
+                  <div className="manage__info">
+                    <p>Primary</p>
+                    <h6>+62 813 9387 7946</h6>
+                  </div>
+                  <Image src={trash} />
                 </div>
               </div>
             </div>

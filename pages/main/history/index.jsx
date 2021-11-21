@@ -51,7 +51,7 @@ export default function History(props) {
                           <img
                             src={
                               el.image
-                                ? `http://localhost:3001/uploads/${el?.image}`
+                                ? `${process.env.URL_BACKEND_LOCAL}/uploads/${el?.image}`
                                 : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                             }
                             alt="profile"

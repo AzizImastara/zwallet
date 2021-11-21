@@ -7,32 +7,24 @@ import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import Search from "components/Search";
 import axios from "utils/axios";
-import { getDataCookie } from "middleware/authorizationPage";
-
-import Image from "next/image";
-
-import samuel from "assets/img/samuel.png";
 
 export default function SearchReceiver(props) {
-  // Client Side Rendering
-  // const [data, setData] = useState(props.data);
-  // // useEffect(() => {
-  // //   getDataUser();
-  // // }, []);
-  // const getDataUser = () => {
-  //   axios
-  //     .get("/user?page=1&limit=2&search=&sort=")
-  //     .then((res) => {
-  //       setData(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  // };
-  // ==========================================================
+  const [data, setData] = useState([]);
 
-  // Server Side Rendering
-  // console.log(props);
+  const getDataUser = () => {
+    axios
+      .get(`/user?page=1&limit=50&search=&sort=firstName ASC`)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
 
   return (
     <Layout title="Search Receiver">
@@ -49,42 +41,26 @@ export default function SearchReceiver(props) {
                   <h6>Search Receiver</h6>
                 </div>
                 <Search />
-                <div className="receiver__transaction">
-                  <div className="profile__user">
-                    <Image src={samuel} alt="" />
-                    <div className="profile__info">
-                      <h6>Samuel Suhi</h6>
-                      <p>+62 813-8492-9994</p>
+                {data?.map((el, index) => {
+                  return (
+                    <div className="profile__transaction" key={index}>
+                      <div className="profile__user">
+                        <img
+                          src={
+                            el.image
+                              ? `${process.env.URL_BACKEND_LOCAL}/uploads/${el?.image}`
+                              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                          }
+                          alt="profile"
+                        />
+                        <div className="profile__info">
+                          <h6>{el.firstName + " " + el.lastName}</h6>
+                          <p>{el.status}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="receiver__transaction">
-                  <div className="profile__user">
-                    <Image src={samuel} alt="" />
-                    <div className="profile__info">
-                      <h6>Samuel Suhi</h6>
-                      <p>+62 813-8492-9994</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="receiver__transaction">
-                  <div className="profile__user">
-                    <Image src={samuel} alt="" />
-                    <div className="profile__info">
-                      <h6>Samuel Suhi</h6>
-                      <p>+62 813-8492-9994</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="receiver__transaction">
-                  <div className="profile__user">
-                    <Image src={samuel} alt="" />
-                    <div className="profile__info">
-                      <h6>Samuel Suhi</h6>
-                      <p>+62 813-8492-9994</p>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
