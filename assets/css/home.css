@@ -64,10 +64,18 @@
   text-decoration: none;
 }
 
+.history__view {
+  align-items: center;
+}
+
+.history__view h5 {
+  margin: 0;
+}
+
 .profile__transaction {
   display: flex;
   justify-content: space-between;
-  margin: 12px 0;
+  margin: 20px 0;
 }
 
 .profile__user {

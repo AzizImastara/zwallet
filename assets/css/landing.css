@@ -1,0 +1,233 @@
+.hero__image,
+.hero__image2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__content,
+.hero__content2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: row;
+}
+
+.hero__title h1 {
+  font-size: 60px;
+  font-weight: 800;
+  color: black;
+}
+
+.hero__title span {
+  color: blue;
+  font-size: 60px;
+  font-weight: 800;
+}
+
+.hero__content h6 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #3a3d42;
+}
+
+.hero__content button {
+  width: 40%;
+  padding: 12px;
+}
+
+.sosmed {
+  margin: 32px 0;
+}
+
+.hero__about {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.about h1 {
+  font-size: 60px;
+  font-weight: 800;
+  color: black;
+}
+
+.about span {
+  color: blue;
+}
+
+.hero__about p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #3a3d42;
+  margin: 0 0 32px 0;
+}
+
+.hero__coloum {
+  background-color: #fff;
+  margin: 12px 0;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.hero__coloum--number {
+  display: flex;
+  align-items: center;
+}
+
+.hero__coloum h5 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #3a3d42;
+}
+
+.hero__coloum--number h6 {
+  margin: 0;
+  color: #3a3d42;
+  font-weight: 700;
+}
+
+.hero__coloum--number p {
+  margin: 0 12px 0 0;
+  color: blue;
+}
+
+.hero__saying,
+.hero__saying--content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero__saying--title h1 {
+  font-size: 60px;
+  font-family: 800;
+  color: black;
+}
+
+.hero__saying--title span {
+  color: blue;
+}
+
+.hero__saying--title p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #3a3d42;
+}
+
+.hero__saying--content {
+  margin: 80px 0;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.hero__saying--content h4 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #373c46;
+}
+
+.hero__saying--content p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #676a71;
+}
+
+.sosmed__bg,
+.jumbotron2__bg {
+  background-color: #e5e5e5;
+  padding: 40px 0;
+  margin: 40px 0;
+}
+
+.hero__saying--bg {
+  background-color: #fff;
+  box-shadow: 0px 5px 70px rgba(197, 197, 197, 0.15);
+  border-radius: 32px;
+}
+
+.footer__bg {
+  background-color: #6379f4;
+  padding: 40px 0;
+  margin: 40px 0 0 0;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 12px;
+}
+
+.footer__desc {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__desc--detail {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer h4 {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.footer p,
+.footer__desc p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(239, 239, 239, 0.75);
+}
+
+.footer__desc--detail h6 {
+  margin-left: 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e5e5e5;
+}
+
+@media (max-width: 991.98px) {
+  .hero__content,
+  .hero__content2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero__title h1,
+  .hero__title span,
+  .about h1,
+  .about span,
+  .hero__saying--title h1,
+  .hero__saying--title span {
+    font-size: 40px;
+    margin-top: 20px;
+  }
+  .hero__coloum {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero__coloum h5 {
+    text-align: start;
+  }
+  .hero__coloum--number {
+    text-align: start;
+  }
+  .hero__saying--content {
+    margin: 0;
+  }
+}

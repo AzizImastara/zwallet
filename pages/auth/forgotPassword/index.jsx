@@ -30,7 +30,12 @@ export default function ForgotPassword() {
             screens.
           </p>
           <form>
-            <input type="email" name="email" placeholder="Enter your e-mail" />
+            <input
+              type="email"
+              className="login__mail"
+              name="email"
+              placeholder="Enter your e-mail"
+            />
             <div className="form__button">
               <button className="btn btn-primary mt-3">Confirm</button>
             </div>

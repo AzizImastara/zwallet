@@ -53,7 +53,7 @@ export default function CreatePin() {
         <div className="col-lg-7 col-sm-0 d-none d-md-inline-block">
           <LayoutAuth />
         </div>
-        <div className="col-lg-5 col-sm-12 d-flex justify-content-center layout__login--form">
+        <div className="col-lg-5 col-sm-12 d-flex justify-content-center pin--form">
           {success ? (
             <SuccessPin />
           ) : (
@@ -72,7 +72,7 @@ export default function CreatePin() {
                   <div className="row">
                     <div className="col-2">
                       <input
-                        style={inputStyle}
+                        // style={inputStyle}
                         maxLength="1"
                         onChange={(event) => addPin(event)}
                         name="1"
@@ -81,7 +81,7 @@ export default function CreatePin() {
                     </div>
                     <div className="col-2">
                       <input
-                        style={inputStyle}
+                        // style={inputStyle}
                         maxLength="1"
                         onChange={(event) => addPin(event)}
                         name="2"
@@ -90,7 +90,7 @@ export default function CreatePin() {
                     </div>
                     <div className="col-2">
                       <input
-                        style={inputStyle}
+                        // style={inputStyle}
                         maxLength="1"
                         onChange={(event) => addPin(event)}
                         name="3"
@@ -99,7 +99,7 @@ export default function CreatePin() {
                     </div>
                     <div className="col-2">
                       <input
-                        style={inputStyle}
+                        // style={inputStyle}
                         maxLength="1"
                         onChange={(event) => addPin(event)}
                         name="4"
@@ -108,7 +108,7 @@ export default function CreatePin() {
                     </div>
                     <div className="col-2">
                       <input
-                        style={inputStyle}
+                        // style={inputStyle}
                         maxLength="1"
                         onChange={(event) => addPin(event)}
                         name="5"
@@ -117,7 +117,7 @@ export default function CreatePin() {
                     </div>
                     <div className="col-2">
                       <input
-                        style={inputStyle}
+                        // style={inputStyle}
                         maxLength="1"
                         onChange={(event) => addPin(event)}
                         name="6"

@@ -6,6 +6,7 @@ import Footer from "components/module/Footer";
 import axios from "utils/axios";
 import Cookie from "js-cookie";
 import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 import Image from "next/image";
 import pencil from "assets/img/icon/pencil-mini.svg";
@@ -61,12 +62,28 @@ export default function EditProfile(props) {
     axios
       .patch(`/user/image/${id}`, formData)
       .then((res) => {
-        if (res.status === 200) {
-          getDataUser();
-        }
+        Swal.fire({
+          position: "top-center",
+          width: 200,
+          icon: "success",
+          title: res.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        getDataUser();
+        // if (res.status === 200) {
+        //   getDataUser();
+        // }
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          position: "top-center",
+          width: 200,
+          icon: "error",
+          title: err.response.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
   };
 
@@ -76,10 +93,10 @@ export default function EditProfile(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3 my-4">
+            <div className="col-lg-3 col-md-12 my-4">
               <Sidebar />
             </div>
-            <div className="col-9 my-4">
+            <div className="col-lg-9 col-md-12 my-4">
               <div className="content__bg">
                 <div className="edit__profile">
                   <img
@@ -117,8 +134,10 @@ export default function EditProfile(props) {
                   <Image src={arrow} alt="" onClick={pin} />
                 </div>
                 <div className="edit__button">
-                  <button className="my-2">Logout</button>
-                  <Image src={arrow} alt="" onClick={keluar} />
+                  <button className="my-2" onClick={keluar}>
+                    Logout
+                  </button>
+                  {/* <Image src={arrow} alt="" onClick={keluar} /> */}
                 </div>
               </div>
             </div>

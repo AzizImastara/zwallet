@@ -13,8 +13,6 @@ import { Modal, Button } from "react-bootstrap";
 import Image from "next/image";
 import Cookie from "js-cookie";
 
-import samuel from "assets/img/samuel.png";
-
 // Server Side Rendering
 export async function getServerSideProps(context) {
   const dataCookie = await getDataCookie(context);
@@ -49,6 +47,8 @@ export default function Home(props) {
   const [historyData, setHistoryData] = useState([]);
   const [show, setShow] = useState(false);
 
+  const router = useRouter();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -64,6 +64,11 @@ export default function Home(props) {
       .catch((err) => {
         console.log(err.response);
       });
+  };
+
+  const receiver = (e) => {
+    e.preventDefault();
+    router.push("/main/searchReceiver");
   };
 
   const History = () => {
@@ -88,10 +93,10 @@ export default function Home(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3 my-4">
+            <div className="col-lg-3 col-md-12 my-4">
               <Sidebar />
             </div>
-            <div className="col-9 my-4 ">
+            <div className="col-lg-9 col-md-12 my-4 ">
               <div className="content__bg">
                 <div className="topup">
                   <div className="topup__balance">
@@ -100,19 +105,21 @@ export default function Home(props) {
                     <h6>{data.noTelp}</h6>
                   </div>
                   <div className="topup__transfer">
-                    <button className="btn">Transfer</button>
+                    <button onClick={receiver} className="btn">
+                      Transfer
+                    </button>
                     <button onClick={handleShow} className="btn">
                       Top Up
                     </button>
                   </div>
                 </div>
                 <div className="row home__info">
-                  <div className="col-7">
+                  <div className="col-lg-7 col-md-12">
                     <div className="chart">
                       <Chart />
                     </div>
                   </div>
-                  <div className="col-5">
+                  <div className="col-lg-5 col-md-12">
                     <div className="history">
                       <div className="history__transaction d-flex justify-content-between">
                         <h5>History Transaction</h5>

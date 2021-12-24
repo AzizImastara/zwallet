@@ -40,10 +40,10 @@ export default function SearchReceiver(props) {
         <Header />
         <div className="container">
           <div className="row">
-            <div className="col-3 my-4">
+            <div className="col-lg-3 col-md-12 my-4">
               <Sidebar />
             </div>
-            <div className="col-9 my-4">
+            <div className="col-lg-9 col-md-12 my-4">
               <div className="content__bg">
                 <div className="receiver">
                   <h6>Search Receiver</h6>

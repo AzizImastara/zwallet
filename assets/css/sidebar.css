@@ -48,3 +48,21 @@
   padding: 12px 32px;
   border-radius: 8px;
 }
+
+@media (max-width: 991.98px) {
+  .side {
+    text-align: center;
+    /* background-color: blue; */
+    /* top: 0; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .side__bottom {
+    display: none;
+  }
+  .history__transaction {
+    margin-top: 60px;
+  }
+}

@@ -36,7 +36,7 @@ export default function Login() {
       .then((res) => {
         // alert(res.data.msg);
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "success",
           title: res.data.msg,
@@ -54,7 +54,7 @@ export default function Login() {
       .catch((err) => {
         // alert(err.response.data.msg);
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "error",
           title: err.response.data.msg,
@@ -85,16 +85,16 @@ export default function Login() {
           </p>
           <form onSubmit={handleSubmit}>
             <input
-              img={mail}
               type="email"
               name="email"
+              className="login__mail"
               placeholder="Enter your e-mail"
               onChange={handleChangeText}
             />
             <input
-              img={lock}
               type="password"
               name="password"
+              className="login__lock"
               placeholder="Enter your password"
               onChange={handleChangeText}
             />

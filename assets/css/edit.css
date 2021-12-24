@@ -65,7 +65,7 @@
   color: #3a3d42;
   font-size: 18px;
   font-weight: 700;
-  margin: 0 0 12px 0;
+  margin: 12px 0;
 }
 
 .personal__info p {
@@ -88,15 +88,22 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 40px 0;
 }
 
 .password__input input {
   width: 80%;
   margin: 8px 0;
-  border-radius: 12px;
-  padding: 8px;
+  padding: 12px 28px;
   border: none;
   border-bottom: 1px solid rgba(169, 169, 169, 0.6);
+  /* background: url("../img/icon/lock.svg"); */
+}
+
+.password__icon {
+  background: url("../img/icon/lock.svg") no-repeat left;
+  padding-left: 25px;
+  background-size: 20px;
 }
 
 .password__input button {
@@ -172,9 +179,11 @@
 
 .pin__change input {
   width: 50px;
+  height: 50px;
   text-align: center;
   margin-bottom: 32px;
   border-radius: 8px;
+  border: 1px solid rgba(169, 169, 169, 0.6);
 }
 
 .manage__telp {

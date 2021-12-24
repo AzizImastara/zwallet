@@ -12,29 +12,6 @@ import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
 
 export default function CreateNewPassword() {
-  // const router = useRouter();
-  // const [form, setForm] = useState({ email: "", password: "" });
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("/auth/login", form)
-  //     .then((res) => {
-  //       console.log(res);
-  //       Cookie.set("id", res.data.data.id);
-  //       Cookie.set("token", res.data.data.token);
-  //       router.push("/main/home");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   console.log(form);
-  // };
-
-  // const handleChangeText = (e) => {
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
-
   return (
     <Layout title="Create New Password">
       <div className="row">
@@ -52,14 +29,14 @@ export default function CreateNewPassword() {
           </p>
           <form>
             <input
-              img={mail}
+              className="login__lock"
               type="password"
               name="password"
               placeholder="Create new password"
               // onChange={handleChangeText}
             />
             <input
-              img={mail}
+              className="login__lock"
               type="password"
               name="password"
               placeholder="Create new password"

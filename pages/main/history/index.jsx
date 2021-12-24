@@ -32,13 +32,13 @@ export default function History(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3 my-4">
+            <div className="col-lg-3 col-md-12 my-4">
               <Sidebar />
             </div>
-            <div className="col-9 my-4">
+            <div className="col-lg-9 col-md-12 my-4">
               <div className="content__bg">
                 <div className="history">
-                  <div className="history__transaction d-flex justify-content-between">
+                  <div className="history__view d-flex justify-content-between">
                     <h5>History Transaction</h5>
                     <button className="btn btn-light">
                       -- Select Filter --

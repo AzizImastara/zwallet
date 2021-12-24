@@ -33,7 +33,7 @@ export default function Register() {
       .post("auth/register", registerData)
       .then((res) => {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "success",
           title: res.data.msg,
@@ -44,7 +44,7 @@ export default function Register() {
       })
       .catch((err) => {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "error",
           title: err.response.data.msg,
@@ -72,30 +72,30 @@ export default function Register() {
           </p>
           <form onSubmit={handleSubmit}>
             <input
-              img={lock}
               type="text"
+              className="login__user"
               name="firstName"
               placeholder="Enter your firstname"
               onChange={(e) => setFirstName(e.target.value)}
             />
             <input
-              img={lock}
               type="text"
+              className="login__user"
               name="lastName"
               placeholder="Enter your lastname"
               onChange={(e) => setLastName(e.target.value)}
             />
             <input
-              img={mail}
               type="email"
               name="email"
+              className="login__mail"
               placeholder="Enter your e-mail"
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
-              img={lock}
               type="password"
               name="password"
+              className="login__lock"
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
             />

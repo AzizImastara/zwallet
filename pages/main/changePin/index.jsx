@@ -39,7 +39,7 @@ export default function ChangePin(props) {
       .then((res) => {
         console.log(res);
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "success",
           title: res.data.msg,
@@ -49,7 +49,7 @@ export default function ChangePin(props) {
       })
       .catch((err) => {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "error",
           title: err.response.data.msg,
@@ -64,10 +64,10 @@ export default function ChangePin(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3 my-4">
+            <div className="col-lg-3 col-md-12 my-4">
               <Sidebar />
             </div>
-            <div className="col-9 my-4">
+            <div className="col-lg-9 col-md-12 my-4">
               <div className="content__bg">
                 <div className="personal__info">
                   <h6>Change Pin</h6>

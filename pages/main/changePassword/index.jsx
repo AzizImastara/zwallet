@@ -26,7 +26,7 @@ export default function ChangePassword(props) {
       .patch(`/user/password/${id}`, changePassword)
       .then((res) => {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "success",
           title: res.data.msg,
@@ -36,7 +36,7 @@ export default function ChangePassword(props) {
       })
       .catch((err) => {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           width: 200,
           icon: "error",
           title: err.response.data.msg,
@@ -52,10 +52,10 @@ export default function ChangePassword(props) {
       <div className="hero__bg">
         <div className="container">
           <div className="row">
-            <div className="col-3 my-4">
+            <div className="col-lg-3 col-md-12 my-4">
               <Sidebar />
             </div>
-            <div className="col-9 my-4">
+            <div className="col-lg-9 col-md-12 my-4">
               <div className="content__bg">
                 <div className="personal__info">
                   <h6>Change Password</h6>
@@ -70,21 +70,24 @@ export default function ChangePassword(props) {
                       type="password"
                       placeholder="Current password"
                       name="oldPassword"
+                      className="password__icon"
                       onChange={(e) => setOldPassword(e.target.value)}
                     />
                     <input
                       type="password"
                       placeholder="New password"
                       name="newPassword"
+                      className="password__icon"
                       onChange={(e) => setNewPassword(e.target.value)}
                     />
                     <input
                       type="password"
                       placeholder="Input new password"
                       name="confirmPassword"
+                      className="password__icon"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <button className="btn btn-light" type="submit">
+                    <button className="btn btn-primary" type="submit">
                       Change Password
                     </button>
                   </div>

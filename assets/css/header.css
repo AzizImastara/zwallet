@@ -32,3 +32,26 @@ nav {
   border-radius: 8px;
   object-fit: cover;
 }
+
+.landing__header {
+  display: flex;
+}
+
+.landing__header button {
+  width: 150px;
+  margin: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid #5f2eea;
+  color: #5f2eea;
+}
+
+.landing__header button:nth-child(2) {
+  background-color: #5f2eea;
+  color: #fff;
+}
+
+.landing__header button:hover {
+  border: 2px solid red;
+  /* color: black; */
+}
