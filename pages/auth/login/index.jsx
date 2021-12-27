@@ -5,9 +5,9 @@ import Cookie from "js-cookie";
 import { getDataCookie } from "middleware/authorizationPage";
 import Link from "next/link";
 import Swal from "sweetalert2";
-
-import mail from "assets/img/icon/mail.svg";
-import lock from "assets/img/icon/lock.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "stores/action/auth";
+import { getUserProfile } from "stores/action/user";
 
 import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
@@ -26,33 +26,37 @@ export async function getServerSideProps(context) {
 }
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/auth/login", form)
+
+    dispatch(login(form))
       .then((res) => {
-        // alert(res.data.msg);
+        console.log(res.action.payload.data.msg);
+        dispatch(getUserProfile(res.action.payload.data.data.id));
         Swal.fire({
           position: "top-center",
           width: 200,
           icon: "success",
-          title: res.data.msg,
+          title: res.action.payload.data.msg,
           showConfirmButton: false,
           timer: 2000,
         });
-        Cookie.set("id", res.data.data.id);
-        Cookie.set("token", res.data.data.token);
-        if (res.data.data.pin === null) {
-          router.push(`/auth/createPin`);
-        } else {
+        if (res.action.payload.data.data.pin) {
+          Cookie.set("token", res.action.payload.data.data.token);
+          Cookie.set("id", res.action.payload.data.data.id);
           router.push("/main/home");
+        } else {
+          Cookie.set("token", res.action.payload.data.data.token);
+          Cookie.set("id", res.action.payload.data.data.id);
+          router.push("/auth/createPin");
         }
       })
       .catch((err) => {
-        // alert(err.response.data.msg);
         Swal.fire({
           position: "top-center",
           width: 200,

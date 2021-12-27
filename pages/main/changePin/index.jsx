@@ -6,12 +6,15 @@ import Footer from "components/module/Footer";
 import axios from "utils/axios";
 import Cookie from "js-cookie";
 import Swal from "sweetalert2";
-
-import Image from "next/image";
-import call from "assets/img/icon/call.svg";
+import { useRouter } from "next/router";
 
 export default function ChangePin(props) {
+  const router = useRouter();
   const [pin, setPin] = useState({});
+
+  const backToProfile = (e) => {
+    router.push("/main/editProfile");
+  };
 
   const addPin = (event) => {
     if (event.target.value) {
@@ -46,6 +49,9 @@ export default function ChangePin(props) {
           showConfirmButton: false,
           timer: 2000,
         });
+        setTimeout(() => {
+          backToProfile();
+        }, 2000);
       })
       .catch((err) => {
         Swal.fire({

@@ -12,24 +12,16 @@ import Image from "next/image";
 import pencil from "assets/img/icon/pencil-mini.svg";
 import arrow from "assets/img/icon/arrow-left.svg";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserProfile, updateImage, deleteImage } from "stores/action/user";
 
 export default function EditProfile(props) {
-  const [data, setData] = useState({});
   const router = useRouter();
   const target = useRef(null);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const id = Cookie.get("id");
-
-  const getDataUser = () => {
-    axios
-      .get(`/user/profile/${id}`)
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
 
   const keluar = () => {
     Cookies.remove("id");
@@ -41,10 +33,6 @@ export default function EditProfile(props) {
     e.preventDefault();
     router.push("/main/changePassword");
   };
-
-  useEffect(() => {
-    getDataUser();
-  }, []);
 
   const personal = (e) => {
     e.preventDefault();
@@ -62,6 +50,7 @@ export default function EditProfile(props) {
     axios
       .patch(`/user/image/${id}`, formData)
       .then((res) => {
+        console.log(res, "res");
         Swal.fire({
           position: "top-center",
           width: 200,
@@ -70,10 +59,7 @@ export default function EditProfile(props) {
           showConfirmButton: false,
           timer: 2000,
         });
-        getDataUser();
-        // if (res.status === 200) {
-        //   getDataUser();
-        // }
+        dispatch(getUserProfile(user.data.id));
       })
       .catch((err) => {
         Swal.fire({
@@ -84,6 +70,28 @@ export default function EditProfile(props) {
           showConfirmButton: false,
           timer: 2000,
         });
+      });
+  };
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    })
+      .then(async (res) => {
+        if (res.isConfirmed) {
+          await dispatch(deleteImage(user.data.id));
+          Swal.fire("Deleted!", "Success delete image", "success");
+          dispatch(getUserProfile(user.data.id));
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
       });
   };
 
@@ -101,15 +109,15 @@ export default function EditProfile(props) {
                 <div className="edit__profile">
                   <img
                     src={
-                      data.image
-                        ? `${process.env.URL_BACKEND_LOCAL}/uploads/${data?.image}`
+                      user.data.image
+                        ? `${process.env.URL_BACKEND_LOCAL}/uploads/${user.data?.image}`
                         : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                     }
                     alt="profile"
                   />
                   <div className="edit__input my-3">
-                    <Image src={pencil} />
-                    <h6 onClick={() => target.current.click()}>Edit</h6>
+                    {/* <Image src={pencil} /> */}
+                    <h6 onClick={() => target.current.click()}>Edit Image</h6>
                     <input
                       style={{ display: "none" }}
                       type="file"
@@ -117,9 +125,10 @@ export default function EditProfile(props) {
                       name="image"
                       onChange={onChangeFile}
                     ></input>
+                    <h6 onClick={handleDelete}>Delete Image</h6>
                   </div>
-                  <h2>{data.firstName + " " + data.lastName}</h2>
-                  <h4>{data.noTelp}</h4>
+                  <h2>{user.data.firstName + " " + user.data.lastName}</h2>
+                  <h4>{user.data.noTelp}</h4>
                 </div>
                 <div className="edit__button">
                   <button className="my-2">Personal Information</button>

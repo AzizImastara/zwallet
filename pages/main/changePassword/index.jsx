@@ -9,9 +9,15 @@ import Cookie from "js-cookie";
 import Swal from "sweetalert2";
 
 export default function ChangePassword(props) {
+  const router = useRouter();
+
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const backToProfile = (e) => {
+    router.push("/main/editProfile");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +39,9 @@ export default function ChangePassword(props) {
           showConfirmButton: false,
           timer: 2000,
         });
+        setTimeout(() => {
+          backToProfile();
+        }, 2000);
       })
       .catch((err) => {
         Swal.fire({

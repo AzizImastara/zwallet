@@ -6,8 +6,8 @@
 }
 
 .edit__profile img {
-  height: 60px;
-  width: 55px;
+  height: 100px;
+  width: 100px;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -50,15 +50,37 @@
 .edit__input {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  flex-direction: column;
+  text-align: center;
 }
 
-.edit__input h6 {
-  color: #7a7886;
+.edit__input h6:nth-child(1) {
+  color: #fff;
   font-size: 16px;
   font-weight: 400;
-  margin: 0 0 0 8px;
+  margin: 8px 0;
   cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #6379f4;
+}
+
+.edit__input h6:last-child {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: red;
+}
+
+.edit__input h6:hover {
+  color: #000;
 }
 
 .personal__info h6 {
@@ -194,6 +216,7 @@
 
 .manage__telp a {
   text-decoration: none;
-  color: #6379f4;
+  color: #6379f4 !important;
   font-size: 16px;
+  cursor: pointer;
 }

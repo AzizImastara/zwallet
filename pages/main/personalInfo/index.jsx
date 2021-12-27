@@ -6,29 +6,53 @@ import Footer from "components/module/Footer";
 import axios from "utils/axios";
 import Cookie from "js-cookie";
 import Link from "next/link";
-
-import Image from "next/image";
+import { Modal, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserProfile, updateProfile } from "stores/action/user";
 
 export default function PersonalInfo(props) {
-  const [data, setData] = useState({});
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  const id = Cookie.get("id");
+  const user = useSelector((state) => state.user);
+  // console.log(user, "sue");
+  const dispatch = useDispatch();
 
-  const getDataUser = () => {
-    axios
-      .get(`/user/profile/${id}`)
+  const [show, setShow] = useState(false);
+  const [noTelp, setNoTelp] = useState(user.data.noTelp);
+
+  const handleTextNoTelp = (e) => {
+    setNoTelp(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    dispatch(updateProfile(user.data.id, { noTelp: noTelp }))
       .then((res) => {
-        console.log(res);
-        setData(res.data.data);
+        console.log(res, "res");
+        handleClose();
+        dispatch(getUserProfile(user.data.id));
+        Swal.fire({
+          position: "top-center",
+          width: 200,
+          icon: "success",
+          title: "Success update phone number",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       })
       .catch((err) => {
         console.log(err.response);
+        Swal.fire({
+          position: "top-center",
+          width: 200,
+          icon: "error",
+          title: err.response.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
   };
-
-  useEffect(() => {
-    getDataUser();
-  }, []);
 
   return (
     <Layout title="Personal Info">
@@ -50,23 +74,23 @@ export default function PersonalInfo(props) {
                   </p>
                   <div className="personal__detail">
                     <p>First Name</p>
-                    <h6>{data.firstName}</h6>
+                    <h6>{user.data.firstName}</h6>
                   </div>
                   <div className="personal__detail">
                     <p>Last Name</p>
-                    <h6>{data.lastName}</h6>
+                    <h6>{user.data.lastName}</h6>
                   </div>
                   <div className="personal__detail">
                     <p>Verified E-mail</p>
-                    <h6>{data.email}</h6>
+                    <h6>{user.data.email}</h6>
                   </div>
                   <div className="personal__detail">
                     <div className="manage__telp">
                       <div className="manage__telp--data">
                         <p>Phone Number</p>
-                        <h6>{data.noTelp}</h6>
+                        <h6>{user.data.noTelp}</h6>
                       </div>
-                      <Link href="/main/addPhoneNumber">Manage</Link>
+                      <a onClick={handleShow}>Manage</a>
                     </div>
                   </div>
                 </div>
@@ -74,6 +98,26 @@ export default function PersonalInfo(props) {
             </div>
           </div>
         </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Topup</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Edit phone number?</p>
+            <input
+              type="number"
+              name="noTelp"
+              onChange={handleTextNoTelp}
+              placeholder="Input Phone Number..."
+              value={noTelp}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <Footer />
       </div>
     </Layout>
