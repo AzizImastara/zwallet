@@ -4,18 +4,21 @@ import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import axios from "utils/axios";
-
-import Image from "next/image";
-import samuel from "assets/img/samuel.png";
+import Pagination from "react-paginate";
 
 export default function History(props) {
   const [transaction, setTransaction] = useState([]);
+  const [pageInfo, setPageInfo] = useState({});
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [filter, setFilter] = useState("WEEK");
 
   const HistoryTransaction = () => {
     axios
-      .get(`transaction/history?page=1&limit=10&filter=MONTH`)
+      .get(`transaction/history?page=${page}&limit=${limit}&filter=${filter}`)
       .then((res) => {
         setTransaction(res.data.data);
+        setPageInfo(res.data.pagination);
       })
       .catch((err) => {
         console.log(err);
@@ -24,7 +27,8 @@ export default function History(props) {
 
   useEffect(() => {
     HistoryTransaction();
-  }, []);
+    console.log(transaction);
+  }, [page, limit, filter]);
 
   return (
     <Layout title="History">
@@ -40,9 +44,15 @@ export default function History(props) {
                 <div className="history">
                   <div className="history__view d-flex justify-content-between">
                     <h5>History Transaction</h5>
-                    <button className="btn btn-light">
-                      -- Select Filter --
-                    </button>
+                    <select
+                      className="btn btn-light"
+                      onChange={(e) => setFilter(e.target.value)}
+                    >
+                      <option hidden>-- Select Filter --</option>
+                      <option value={"WEEK"}>Week</option>
+                      <option value={"MONTH"}>Month</option>
+                      <option value={"YEAR"}>Year</option>
+                    </select>
                   </div>
                   {transaction?.map((el, index) => {
                     return (
@@ -57,16 +67,51 @@ export default function History(props) {
                             alt="profile"
                           />
                           <div className="profile__info">
-                            <h6>{el.firstName}</h6>
-                            <p>{el.status}</p>
+                            <h6>
+                              {el.firstName} {el.lastName}
+                            </h6>
+                            <p>
+                              {el.status} - {el.type}
+                            </p>
                           </div>
                         </div>
                         <div className="profile__money">
-                          <h6>{el.amount}</h6>
+                          {el.type === "send" ? (
+                            <div
+                              className="align-self-center nunito-700"
+                              style={{ color: "#FF5B37" }}
+                            >
+                              -{el.amount}
+                            </div>
+                          ) : el.type === "topup" ? (
+                            <div
+                              className="align-self-center nunito-700"
+                              style={{ color: "#FF5B37" }}
+                            >
+                              +{el.amount}
+                            </div>
+                          ) : (
+                            <div
+                              className="align-self-center nunito-700"
+                              style={{ color: "#1EC15F" }}
+                            >
+                              +{el.amount}
+                            </div>
+                          )}
                         </div>
                       </div>
                     );
                   })}
+                  <Pagination
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    breakLabel={"..."}
+                    pageCount={pageInfo.totalPage}
+                    onPageChange={(e) => setPage(e.selected + 1)}
+                    containerClassName={"pagination"}
+                    disabledClassName={"pagination_disabled"}
+                    activeClassName={"pagination__active"}
+                  />
                 </div>
               </div>
             </div>

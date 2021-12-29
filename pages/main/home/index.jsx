@@ -133,7 +133,28 @@ export default function Home(props) {
                               </div>
                             </div>
                             <div className="profile__money">
-                              <h6>{el.amount}</h6>
+                              {el.type === "send" ? (
+                                <div
+                                  className="align-self-center nunito-700"
+                                  style={{ color: "#FF5B37" }}
+                                >
+                                  -{el.amount}
+                                </div>
+                              ) : el.type === "topup" ? (
+                                <div
+                                  className="align-self-center nunito-700"
+                                  style={{ color: "#FF5B37" }}
+                                >
+                                  +{el.amount}
+                                </div>
+                              ) : (
+                                <div
+                                  className="align-self-center nunito-700"
+                                  style={{ color: "#1EC15F" }}
+                                >
+                                  +{el.amount}
+                                </div>
+                              )}
                             </div>
                           </div>
                         );

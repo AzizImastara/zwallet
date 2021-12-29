@@ -38,6 +38,8 @@ export default function InputAmount(props) {
       return alert("Not enough amount");
     } else if (!dataTransfer.amount) {
       return alert("Please fill your amount");
+    } else if (dataTransfer.amount < 10000) {
+      return alert("Minimum Rp 10000 to transfer");
     }
     router.push({ pathname: "/main/confirmation", query: dataTransfer });
   };
