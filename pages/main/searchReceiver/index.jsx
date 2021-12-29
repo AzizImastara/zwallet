@@ -9,6 +9,7 @@ import Search from "components/Search";
 import axios from "utils/axios";
 
 export default function SearchReceiver(props) {
+  const router = useRouter();
   const [data, setData] = useState([]);
 
   const getDataUser = (search) => {
@@ -34,6 +35,11 @@ export default function SearchReceiver(props) {
     getDataUser();
   }, []);
 
+  const inputAmount = (id) => {
+    router.push({ pathname: "/main/inputAmount", query: { id: id } });
+    // console.log(id);
+  };
+
   return (
     <Layout title="Search Receiver">
       <div className="hero__bg">
@@ -51,7 +57,11 @@ export default function SearchReceiver(props) {
                 <Search handleChange={searchUser} />
                 {data?.map((el, index) => {
                   return (
-                    <div className="profile__transaction" key={index}>
+                    <div
+                      className="profile__transaction"
+                      key={index}
+                      onClick={() => inputAmount(el.id)}
+                    >
                       <div className="profile__user">
                         <img
                           src={

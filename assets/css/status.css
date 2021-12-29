@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+.status__bg {
+  background-color: #fff;
+  padding: 20px;
+}
+
 .status p {
   color: #7a7886;
   font-size: 16px;

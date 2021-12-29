@@ -80,6 +80,7 @@
 
 .profile__user {
   display: flex;
+  cursor: pointer;
 }
 
 .profile__user img {

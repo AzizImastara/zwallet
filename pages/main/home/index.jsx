@@ -9,6 +9,8 @@ import Chart from "components/Chart";
 import axios from "utils/axios";
 import { getDataCookie } from "middleware/authorizationPage";
 import { Modal, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserProfile } from "stores/action/user";
 
 import Image from "next/image";
 import Cookie from "js-cookie";
@@ -43,28 +45,16 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
-  const [data, setData] = useState({});
+  const dispatch = useDispatch();
   const [historyData, setHistoryData] = useState([]);
   const [show, setShow] = useState(false);
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   const router = useRouter();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const id = Cookie.get("id");
-
-  const getDataUser = () => {
-    axios
-      .get(`/user/profile/${id}`)
-      .then((res) => {
-        // console.log(res);
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
 
   const receiver = (e) => {
     e.preventDefault();
@@ -83,7 +73,6 @@ export default function Home(props) {
   };
 
   useEffect(() => {
-    getDataUser();
     History();
   }, []);
 
@@ -101,8 +90,8 @@ export default function Home(props) {
                 <div className="topup">
                   <div className="topup__balance">
                     <h5>Balance</h5>
-                    <h2>Rp{data.balance}</h2>
-                    <h6>{data.noTelp}</h6>
+                    <h2>Rp{user.data.balance}</h2>
+                    <h6>{user.data.noTelp}</h6>
                   </div>
                   <div className="topup__transfer">
                     <button onClick={receiver} className="btn">

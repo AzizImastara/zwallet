@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import Link from "next/link";
 import Header from "components/module/Header";
 import Layout from "components/Layout";
 import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
+import Success from "components/Success";
+import Failed from "components/Failed";
 import axios from "utils/axios";
-
-import Image from "next/image";
-import samuel from "assets/img/samuel.png";
+import Swal from "sweetalert2";
 
 import { Modal, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserProfile } from "stores/action/user";
 
 export default function Confirmation(props) {
   const [show, setShow] = useState(false);
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const newDate = new Date().toLocaleString("en-US", {
+    timeZone: "Asia/Jakarta",
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [pin, setPin] = useState({});
+  const [success, setSuccess] = useState(false);
 
   const addPin = (event) => {
     if (event.target.value) {
@@ -39,70 +48,125 @@ export default function Confirmation(props) {
     const allPin = parseInt(
       pin.pin1 + pin.pin2 + pin.pin3 + pin.pin4 + pin.pin5 + pin.pin6
     );
-    console.log(allPin);
-    // const id = Cookie.get("id");
-
-    // axios
-    //   .patch(`/user/pin/${id}`, { pin: allPin })
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.data.status === 200) setSuccess(true);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .get(`/user/pin?pin=${allPin}`, { pin: allPin })
+      .then((res) => {
+        if (res.status === 200 && res.statusText === "OK") {
+          axios
+            .post(`/transaction/transfer`, {
+              receiverId: router.query.receiverId,
+              amount: router.query.amount,
+              notes: router.query.notes,
+            })
+            .then((res) => {
+              dispatch(getUserProfile(res.data.data.senderId));
+              // console.log(res.data.data.senderId);
+              Swal.fire({
+                position: "top-center",
+                width: 200,
+                icon: "success",
+                title: res.data.msg,
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              setSuccess(true);
+              handleClose();
+            })
+            .catch((err) => {
+              console.log(err.response);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          position: "top-center",
+          width: 200,
+          icon: "error",
+          title: err.response.data.msg,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      });
   };
+
+  const getDataUser = () => {
+    axios
+      .get(`/user/profile/${router.query.receiverId}`)
+      .then((res) => {
+        // console.log(res.data.data, "sadk");
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
 
   return (
     <Layout title="Confirmation">
       <div className="hero__bg">
         <Header />
         <div className="container">
-          <div className="row">
-            <div className="col-3 my-4">
-              <Sidebar />
-            </div>
-            <div className="col-9 my-4">
-              <div className="content__bg">
-                <div className="amount">
-                  <h6>Transfer To</h6>
-                </div>
-                <div className="profile__transaction">
-                  <div className="profile__user">
-                    <Image src={samuel} alt="" />
-                    <div className="profile__info">
-                      <h6>Samuel Suhi</h6>
-                      <p>+62 813-8492-9994</p>
+          {success ? (
+            <Success newDate={newDate} />
+          ) : (
+            <div className="row">
+              <div className="col-lg-3 col-md-12 my-4">
+                <Sidebar />
+              </div>
+              <div className="col-lg-9 col-md-12 my-4">
+                <div className="content__bg">
+                  <div className="amount">
+                    <h6>Transfer To</h6>
+                  </div>
+                  <div className="profile__transaction">
+                    <div className="profile__user">
+                      <img
+                        src={
+                          data.image
+                            ? `${process.env.URL_BACKEND_LOCAL}/uploads/${data?.image}`
+                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                        }
+                        alt="profile"
+                      />
+                      <div className="profile__info">
+                        <h6>{data.firstName + " " + data.lastName}</h6>
+                        <p>{data.noTelp}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="amount">
-                  <h6>Details</h6>
-                </div>
-                <div className="amount__details">
-                  <p>Amount</p>
-                  <h6>Rp100.000</h6>
-                </div>
-                <div className="amount__details">
-                  <p>Balance</p>
-                  <h6>Rp20.000</h6>
-                </div>
-                <div className="amount__details">
-                  <p>Date & Time</p>
-                  <h6>May 11, 2020 - 12.20</h6>
-                </div>
-                <div className="amount__details">
-                  <p>Notes</p>
-                  <h6>For buying some socks</h6>
-                </div>
-                <div className="amount__button">
-                  <button onClick={handleShow} className="btn btn-primary">
-                    Continue
-                  </button>
+                  <div className="amount">
+                    <h6>Details</h6>
+                  </div>
+                  <div className="amount__details">
+                    <p>Amount</p>
+                    <h6>Rp{router.query.amount}</h6>
+                  </div>
+                  <div className="amount__details">
+                    <p>Balance</p>
+                    <h6>Rp{user.data.balance - router.query.amount}</h6>
+                  </div>
+                  <div className="amount__details">
+                    <p>Date & Time</p>
+                    <h6>{newDate}</h6>
+                  </div>
+                  <div className="amount__details">
+                    <p>Notes</p>
+                    <h6>{router.query.notes}</h6>
+                  </div>
+                  <div className="amount__button">
+                    <button onClick={handleShow} className="btn btn-primary">
+                      Continue
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
           <Footer />
         </div>
       </div>

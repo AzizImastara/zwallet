@@ -13,6 +13,7 @@ import logout from "assets/img/icon/log-out.svg";
 export default function Sidebar() {
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const [topUp, setTopUp] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
