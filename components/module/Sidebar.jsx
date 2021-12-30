@@ -9,14 +9,55 @@ import plus from "assets/img/icon/plus.svg";
 import arrow from "assets/img/icon/arrow-up.svg";
 import user from "assets/img/icon/user.svg";
 import logout from "assets/img/icon/log-out.svg";
+import axios from "utils/axios";
 
 export default function Sidebar() {
   const router = useRouter();
   const [show, setShow] = useState(false);
-  const [topUp, setTopUp] = useState([]);
+  const [errTopup, setErrorTopop] = useState({
+    show: false,
+    msg: "",
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [data, setData] = useState("");
+
+  const handleTextTopup = (e) => {
+    setData(e.target.value);
+  };
+
+  const handleSubmitTopup = () => {
+    if (data < 10000) {
+      setErrorTopop({
+        show: true,
+        msg: `Minimal Rp.10000 to top up`,
+      });
+
+      setTimeout(() => {
+        setErrorTopop({
+          show: false,
+          msg: ``,
+        });
+      }, 3000);
+    } else {
+      axios
+        .post(`/transaction/top-up`, { amount: data })
+        .then((res) => {
+          console.log(res, "topup");
+          window.open(
+            res.data.data.redirectUrl,
+            "_blank",
+            "noreferrer noopenner"
+          );
+          handleClose();
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
+  };
 
   const keluar = () => {
     Cookies.remove("id");
@@ -74,10 +115,28 @@ export default function Sidebar() {
         </Modal.Header>
         <Modal.Body>
           <p>Enter the amount of money, and click submit</p>
-          <input type="text" />
+          <input
+            type="number"
+            placeholder="0.00"
+            name="amount"
+            onChange={handleTextTopup}
+          />
+          {errTopup.show && (
+            <p
+              style={{
+                color: "#ff5b37",
+                textAlign: "center",
+                marginTop: "20px",
+              }}
+            >
+              {errTopup.msg}
+            </p>
+          )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary">Submit</Button>
+          <Button variant="primary" name="submit" onClick={handleSubmitTopup}>
+            Submit
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

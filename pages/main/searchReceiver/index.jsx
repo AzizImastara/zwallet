@@ -7,20 +7,25 @@ import Sidebar from "components/module/Sidebar";
 import Footer from "components/module/Footer";
 import Search from "components/Search";
 import axios from "utils/axios";
+import Pagination from "react-paginate";
 
 export default function SearchReceiver(props) {
   const router = useRouter();
   const [data, setData] = useState([]);
+  const [pageInfo, setPageInfo] = useState({});
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
 
   const getDataUser = (search) => {
     axios
       .get(
-        `/user?page=1&limit=50&search=${
+        `/user?page=${page}&limit=${limit}&search=${
           search ? search : ""
         }&sort=firstName ASC`
       )
       .then((res) => {
         setData(res.data.data);
+        setPageInfo(res.data.pagination);
       })
       .catch((err) => {
         console.log(err.response);
@@ -33,7 +38,7 @@ export default function SearchReceiver(props) {
 
   useEffect(() => {
     getDataUser();
-  }, []);
+  }, [page, limit]);
 
   const inputAmount = (id) => {
     router.push({ pathname: "/main/inputAmount", query: { id: id } });
@@ -79,6 +84,16 @@ export default function SearchReceiver(props) {
                     </div>
                   );
                 })}
+                <Pagination
+                  previousLabel={"Previous"}
+                  nextLabel={"Next"}
+                  breakLabel={"..."}
+                  pageCount={pageInfo.totalPage}
+                  onPageChange={(e) => setPage(e.selected + 1)}
+                  containerClassName={"pagination"}
+                  disabledClassName={"pagination_disabled"}
+                  activeClassName={"pagination__active"}
+                />
               </div>
             </div>
           </div>
