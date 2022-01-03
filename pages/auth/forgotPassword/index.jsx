@@ -11,7 +11,7 @@ import LayoutAuth from "components/LayoutAuth";
 export default function ForgotPassword() {
   const [form, setForm] = useState({
     email: "",
-    linkDirect: "http://localhost:3000/auth/forgotPassword",
+    linkDirect: "https://zwallet-next.netlify.app/auth/forgotPassword",
   });
 
   const handleChangeText = (e) => {
