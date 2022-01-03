@@ -6,9 +6,6 @@ import { getDataCookie } from "middleware/authorizationPage";
 import Link from "next/link";
 import Swal from "sweetalert2";
 
-import mail from "assets/img/icon/mail.svg";
-import lock from "assets/img/icon/lock.svg";
-
 import Layout from "components/Layout";
 import LayoutAuth from "components/LayoutAuth";
 

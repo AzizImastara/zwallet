@@ -36,7 +36,7 @@ export default function Success({ newDate }) {
           </div>
           <div className="status__info">
             <p>Balance Left</p>
-            <h6>Rp{user.data.balance - router.query.amount}</h6>
+            <h6>Rp{user.data.balance}</h6>
           </div>
           <div className="status__info">
             <p>Date & Time</p>
