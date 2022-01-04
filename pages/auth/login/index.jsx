@@ -28,6 +28,7 @@ export async function getServerSideProps(context) {
 export default function Login() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  // console.log(auth, "auth");
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
 

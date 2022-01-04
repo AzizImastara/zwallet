@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { Modal, Button } from "react-bootstrap";
+import { getUserProfile } from "stores/action/user";
+import { useDispatch, useSelector } from "react-redux";
 
 import grid from "assets/img/icon/grid.svg";
 import plus from "assets/img/icon/plus.svg";
 import arrow from "assets/img/icon/arrow-up.svg";
-import user from "assets/img/icon/user.svg";
+import users from "assets/img/icon/user.svg";
 import logout from "assets/img/icon/log-out.svg";
 import axios from "utils/axios";
 
 export default function Sidebar() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  // console.log(user, "user");
   const [show, setShow] = useState(false);
   const [errTopup, setErrorTopop] = useState({
     show: false,
@@ -46,6 +51,7 @@ export default function Sidebar() {
         .post(`/transaction/top-up`, { amount: data })
         .then((res) => {
           console.log(res, "topup");
+
           window.open(
             res.data.data.redirectUrl,
             "_blank",
@@ -58,6 +64,10 @@ export default function Sidebar() {
         });
     }
   };
+
+  useEffect(() => {
+    dispatch(getUserProfile(user.data.id));
+  }, []);
 
   const keluar = () => {
     Cookies.remove("id");
@@ -97,7 +107,7 @@ export default function Sidebar() {
             <h4 onClick={handleShow}>Top Up</h4>
           </div>
           <div className="sidebar">
-            <Image src={user} alt="user" />
+            <Image src={users} alt="user" />
             <h4 onClick={edit}>Profile</h4>
           </div>
         </div>
