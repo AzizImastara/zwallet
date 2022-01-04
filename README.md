@@ -25,3 +25,19 @@ Zwallet bertujuan untuk melakukan transaksi seperti transfer, top up saldo, yang
 - https://zwallet-next.netlify.app/
 
 ## Screenshot
+
+#### Login
+
+<img src="https://github.com/AzizImastara/zwallet-next/blob/main/public/readme/loginz.png" alt="login" />
+
+#### Home
+
+<img src="https://github.com/AzizImastara/zwallet-next/blob/main/public/readme/homez.png" alt="login" />
+
+#### Transfer
+
+<img src="https://github.com/AzizImastara/zwallet-next/blob/main/public/readme/tfz.png" alt="login" />
+
+#### Profile
+
+<img src="https://github.com/AzizImastara/zwallet-next/blob/main/public/readme/profilez.png" alt="login" />
